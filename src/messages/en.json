@@ -1,0 +1,196 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Cart",
+    "trackOrder": "Track Order",
+    "admin": "Admin"
+  },
+  "hero": {
+    "tagline": "First Choice For Smart Farmers",
+    "exploreProducts": "Explore Products",
+    "contactUs": "Contact Us"
+  },
+  "stats": {
+    "experience": "Years Experience",
+    "products": "Products",
+    "categories": "Categories",
+    "supply": "Pan India Supply"
+  },
+  "categories": {
+    "title": "Product Categories",
+    "insecticide": "Insecticide",
+    "fungicide": "Fungicide",
+    "herbicide": "Herbicide",
+    "pgr": "PGR / Plant Growth Regulators",
+    "viewProducts": "View Products"
+  },
+  "whyChoose": {
+    "title": "Why Choose LYKAN",
+    "quality": "Quality Assured",
+    "qualityDesc": "Premium agrochemical products tested for maximum efficacy",
+    "range": "Wide Range",
+    "rangeDesc": "120+ products across 4 categories for all crop needs",
+    "delivery": "Fast Delivery",
+    "deliveryDesc": "Pan India supply with quick dispatch from Rajkot",
+    "support": "Dealer Support",
+    "supportDesc": "Dedicated B2B support for dealers and retailers"
+  },
+  "featured": {
+    "title": "Featured Products",
+    "viewAll": "View All Products"
+  },
+  "dealerInquiry": {
+    "title": "Become a Dealer / Retailer",
+    "subtitle": "Partner with LYKAN CROP SCIENCE for quality agrochemical products",
+    "submit": "Send Inquiry"
+  },
+  "products": {
+    "title": "Our Products",
+    "search": "Search by brand or technical name...",
+    "all": "All",
+    "viewDetails": "View Details",
+    "addToInquiry": "Add to Inquiry",
+    "buyNow": "Buy Now",
+    "packing": "Packing",
+    "contactForDetails": "Contact for details",
+    "noResults": "No products found",
+    "printCatalogue": "Print Catalogue",
+    "page": "Page",
+    "of": "of"
+  },
+  "productDetail": {
+    "dose": "Dose Instructions",
+    "packingSizes": "Available Packing Sizes",
+    "sendInquiry": "Send Inquiry",
+    "buyNow": "Buy Now",
+    "related": "Related Products",
+    "share": "Share on WhatsApp",
+    "selectPacking": "Select packing size"
+  },
+  "inquiry": {
+    "title": "Product Inquiry",
+    "fullName": "Full Name",
+    "mobile": "Mobile Number",
+    "whatsapp": "WhatsApp Number",
+    "sameAsMobile": "Same as mobile",
+    "city": "City / District",
+    "state": "State",
+    "businessType": "Business Type",
+    "dealer": "Dealer",
+    "retailer": "Retailer",
+    "farmer": "Farmer",
+    "other": "Other",
+    "message": "Message / Requirements",
+    "selectedProducts": "Selected Products",
+    "submit": "Submit Inquiry",
+    "success": "Thank you! Our team will contact you within 24 hours.",
+    "error": "Failed to submit inquiry. Please try again."
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue Shopping",
+    "proceedCheckout": "Proceed to Checkout",
+    "remove": "Remove",
+    "quantity": "Qty",
+    "subtotal": "Subtotal",
+    "total": "Total"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "step1": "Delivery Details",
+    "step2": "Payment",
+    "step3": "Confirmation",
+    "fullName": "Full Name",
+    "firmName": "Company / Firm Name",
+    "mobile": "Mobile Number",
+    "whatsapp": "WhatsApp Number",
+    "street": "Street Address",
+    "city": "City",
+    "district": "District",
+    "state": "State",
+    "pin": "PIN Code",
+    "deliveryNotes": "Delivery Notes",
+    "next": "Next",
+    "back": "Back",
+    "placeOrder": "Place Order",
+    "payOnline": "Pay Online (Razorpay)",
+    "bankTransfer": "Bank Transfer",
+    "payOnDelivery": "Pay on Delivery",
+    "bankDetails": "Bank Account Details",
+    "orderSummary": "Order Summary",
+    "orderPlaced": "Order Placed Successfully!",
+    "orderId": "Order ID",
+    "estimatedDelivery": "Estimated Delivery",
+    "businessDays": "3-7 business days",
+    "trackOrder": "Track Your Order"
+  },
+  "trackOrder": {
+    "title": "Track Your Order",
+    "orderId": "Order ID",
+    "mobile": "Mobile Number",
+    "track": "Track Order",
+    "notFound": "Order not found. Please check your details.",
+    "orderDetails": "Order Details",
+    "deliveryAddress": "Delivery Address",
+    "trackingNumber": "Tracking Number",
+    "courier": "Courier",
+    "expectedDate": "Expected Delivery"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "getInTouch": "Get in Touch",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "businessHours": "Business Hours",
+    "hours": "Mon - Sat: 9:00 AM - 6:00 PM",
+    "sendMessage": "Send Message",
+    "name": "Name",
+    "message": "Message",
+    "success": "Message sent successfully!"
+  },
+  "about": {
+    "title": "About Us",
+    "story": "Our Story",
+    "storyText": "With over 20 years of experience in pesticides and seeds, LYKAN CROP SCIENCE has established itself as a trusted manufacturer and trader of agrochemical products in Gujarat and across India.",
+    "mission": "Our Mission",
+    "missionText": "Enhance productivity and profitability of farmers by providing high-quality agriculture inputs, innovation technologies, and necessary services.",
+    "vision": "Our Vision",
+    "visionText": "A world where every farmer has access to knowledge and tools needed to produce high-quality food in a responsible manner.",
+    "categories": "Product Categories",
+    "toxicity": "Toxicity Label Guide",
+    "caution": "CAUTION",
+    "cautionDesc": "Harmful if swallowed or inhaled. Use with care.",
+    "danger": "DANGER",
+    "dangerDesc": "Highly toxic. Requires protective equipment.",
+    "poison": "POISON",
+    "poisonDesc": "Extremely toxic. Handle with extreme caution."
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "contactInfo": "Contact Info",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "backToTop": "Back to top"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "goToProducts": "Go to Products"
+  }
+}
