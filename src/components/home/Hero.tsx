@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { COMPANY } from '@/lib/constants';
 
@@ -16,44 +17,76 @@ export function Hero({ bannerUrl, logoUrl }: HeroProps) {
 
   return (
     <section
-      className="relative min-h-[80vh] flex items-center justify-center text-white"
+      className="relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.55)), url(${bg})`,
+        backgroundImage: `linear-gradient(135deg, rgba(15, 46, 31, 0.75) 0%, rgba(26, 61, 42, 0.65) 100%), url(${bg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
       }}
     >
-      <div className="container mx-auto px-4 text-center">
+      {/* Subtle leaf texture overlay */}
+      <div className="absolute inset-0 opacity-10 bg-texture-leaf pointer-events-none" />
 
-        {/* Bigger logo with white glow so it pops on dark bg */}
-        <div className="flex items-center justify-center mb-8">
-          <img
-            src={logoUrl || '/fulllogo.png'}
-            alt={COMPANY.name}
-            className="h-36 md:h-48 w-auto object-contain"
-            style={{ filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.4))' }}
-          />
+      <div className="container mx-auto px-4 text-center relative z-10">
+        {/* Secondary trust line above headline */}
+        <div className="mb-6 inline-block">
+          <p className="text-accent-500 font-semibold text-sm tracking-wider uppercase">
+            {t('trustline')}
+          </p>
         </div>
 
-        <p className="text-2xl md:text-3xl font-medium mb-10 text-white tracking-wide">
+        {/* Main headline */}
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight text-pretty">
           {t('tagline')}
+        </h1>
+
+        {/* Subheadline */}
+        <p className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto font-light">
+          {t('subtitle')}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/products">
-            <Button variant="accent" size="lg">{t('exploreProducts')}</Button>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <Link href="/products" className="w-full sm:w-auto">
+            <Button 
+              className="w-full btn-accent group"
+            >
+              {t('exploreProducts')}
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </Link>
-          <Link href="/contact">
+          <Link href="/contact" className="w-full sm:w-auto">
             <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-navy"
+              className="w-full btn-white"
             >
               {t('contactUs')}
             </Button>
           </Link>
         </div>
 
+        {/* Trust badges */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-white/70 pt-8">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-accent-500" />
+            {t('badge1')}
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-accent-500" />
+            {t('badge2')}
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-accent-500" />
+            {t('badge3')}
+          </div>
+        </div>
+      </div>
+
+      {/* Animated scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
+          <div className="w-1 h-2 bg-white/50 rounded-full animate-pulse" />
+        </div>
       </div>
     </section>
   );

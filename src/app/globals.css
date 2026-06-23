@@ -1,37 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --font-noto-gujarati: 'Noto Sans Gujarati';
+    --font-noto-devanagari: 'Noto Sans Devanagari';
+  }
+
   html {
     scroll-behavior: smooth;
+    @apply bg-surface;
   }
+
   body {
-    @apply font-body text-textDark bg-lightBg antialiased;
+    @apply font-body text-ink bg-surface antialiased;
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+
+  h1 {
+    @apply font-heading text-4xl md:text-5xl font-bold leading-tight text-ink;
+  }
+
+  h2 {
+    @apply font-heading text-3xl md:text-4xl font-bold leading-snug text-ink;
+  }
+
+  h3 {
+    @apply font-heading text-2xl md:text-3xl font-bold leading-snug text-ink;
+  }
+
+  h4, h5, h6 {
+    @apply font-heading font-bold text-ink;
+  }
+
+  p {
+    @apply text-base leading-relaxed text-ink/80;
   }
 }
 
 @layer components {
+  /* Button variants */
   .btn-primary {
-    @apply bg-primary text-textLight px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium bg-navy-900 text-textLight hover:bg-navy-800 transition-all duration-200 active:scale-95;
   }
+
   .btn-accent {
-    @apply bg-accent text-navy px-6 py-3 rounded-lg font-medium hover:bg-accent/90 transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium bg-accent-500 text-navy-900 hover:bg-accent-600 transition-all duration-200 active:scale-95;
   }
+
   .btn-outline {
-    @apply border-2 border-primary text-primary px-6 py-3 rounded-lg font-medium hover:bg-primary hover:text-textLight transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-textLight transition-all duration-200 active:scale-95;
   }
+
+  .btn-white {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium bg-textLight text-navy-900 border border-border hover:bg-accent-100 transition-all duration-200 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium text-navy-900 hover:bg-navy-900/5 transition-all duration-200;
+  }
+
+  /* Card component */
   .card {
     @apply bg-white rounded-lg border border-border shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300;
   }
+
+  /* Input field */
   .input-field {
-    @apply w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white;
+    @apply w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500/30 focus:border-accent-500 bg-white text-ink placeholder:text-ink/40;
   }
-  .badge-insecticide { @apply bg-red-100 text-insecticide border border-red-200; }
-  .badge-fungicide { @apply bg-blue-100 text-fungicide border border-blue-200; }
-  .badge-herbicide { @apply bg-orange-100 text-herbicide border border-orange-200; }
-  .badge-pgr { @apply bg-purple-100 text-pgr border border-purple-200; }
+
+  /* Badge variants */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-navy-900/10 text-navy-900;
+  }
+
+  .badge-accent {
+    @apply badge bg-accent-100 text-accent-700;
+  }
+
+  .badge-insecticide {
+    @apply badge bg-red-100 text-red-700 border border-red-200;
+  }
+
+  .badge-fungicide {
+    @apply badge bg-blue-100 text-blue-700 border border-blue-200;
+  }
+
+  .badge-herbicide {
+    @apply badge bg-orange-100 text-orange-700 border border-orange-200;
+  }
+
+  .badge-pgr {
+    @apply badge bg-purple-100 text-purple-700 border border-purple-200;
+  }
+
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Section padding */
+  .section-py {
+    @apply py-16 md:py-24;
+  }
+
+  .section-px {
+    @apply px-4 md:px-6 lg:px-8;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-navy {
+    @apply bg-gradient-to-b from-navy-900 to-navy-800;
+  }
 }

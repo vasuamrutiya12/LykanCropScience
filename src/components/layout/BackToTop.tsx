@@ -8,16 +8,16 @@ export function BackToTop() {
 
   useEffect(() => {
     const handler = () => setVisible(window.scrollY > 400);
-    window.addEventListener('scroll', handler);
+    window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
-
-  if (!visible) return null;
 
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-36 md:bottom-20 right-4 z-40 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary/90 transition-colors"
+      className={`fixed bottom-24 md:bottom-6 right-4 z-40 w-12 h-12 flex items-center justify-center bg-navy-900 hover:bg-navy-800 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
       aria-label="Back to top"
     >
       <ArrowUp className="w-5 h-5" />
