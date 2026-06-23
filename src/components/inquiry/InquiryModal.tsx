@@ -77,11 +77,11 @@ export function InquiryModal({ isOpen, onClose, products = [] }: InquiryModalPro
     <Modal isOpen={isOpen} onClose={onClose} title={t('title')} size="lg">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {products.length > 0 && (
-          <div>
-            <label className="text-sm font-medium">{t('selectedProducts')}</label>
-            <div className="flex flex-wrap gap-2 mt-1">
+          <div className="bg-accent-100 border border-accent-500/30 rounded-lg p-4 mb-2">
+            <label className="text-sm font-semibold text-navy-900 block mb-3">{t('selectedProducts')}</label>
+            <div className="flex flex-wrap gap-2">
               {products.map((p, i) => (
-                <span key={i} className="px-2 py-1 bg-primary/10 text-primary text-sm rounded-full">
+                <span key={i} className="px-3 py-1.5 bg-navy-900/10 text-navy-900 text-sm rounded-full font-medium">
                   {p.brandName}
                 </span>
               ))}
