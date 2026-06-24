@@ -82,8 +82,7 @@ export function Hero({ bannerUrl, logoUrl }: HeroProps) {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="relative text-white bg-white/[0.06] backdrop-blur-md border border-white/20 font-semibold hover:bg-[#2C5BAA]/25 hover:border-[#2C5BAA]/70 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[#2C5BAA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050B14]"
-                  >
+                    className="relative text-white bg-white/[0.06] backdrop-blur-md border border-white/15 font-semibold hover:bg-[#9AE85C]/15 hover:border-[#9AE85C]/60 hover:text-[#9AE85C] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[#9AE85C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050B14]"                  >
                     {t('contactUs')}
                   </Button>
                 </Link>
