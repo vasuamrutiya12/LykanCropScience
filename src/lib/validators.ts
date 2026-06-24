@@ -32,8 +32,26 @@ export const productSchema = z.object({
   technicalName: z.string().optional(),
   category: z.enum(CATEGORIES),
   dose: z.string().optional(),
-  packingSizes: z.array(z.string()).default([]),
+  packingSizes: z
+    .array(
+      z.object({
+        size: z.string().min(1),
+        price: z.number().min(0).default(0),
+        mrp: z.number().min(0).default(0),
+      })
+    )
+    .default([]),
   pricePerPacking: z.record(z.number()).optional(),
+  details: z
+    .union([
+      z.string(),
+      z.object({
+        en: z.string().default(''),
+        gu: z.string().optional(),
+        hi: z.string().optional(),
+      }),
+    ])
+    .optional(),
   imageUrl: z.string().optional(),
   cloudinaryId: z.string().optional(),
   images: z.array(z.object({

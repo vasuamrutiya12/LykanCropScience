@@ -64,6 +64,11 @@
   "productDetail": {
     "dose": "Dose Instructions",
     "packingSizes": "Available Packing Sizes",
+    "productDetails": "Product Details",
+    "translating": "Translating...",
+    "mrp": "MRP",
+    "percentOff": "{percent}% off",
+    "contactForPrice": "Contact for price",
     "sendInquiry": "Send Inquiry",
     "buyNow": "Buy Now",
     "related": "Related Products",

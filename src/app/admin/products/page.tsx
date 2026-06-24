@@ -8,6 +8,7 @@ import { Input, Select, Textarea } from '@/components/ui/Input';
 import { CategoryBadge } from '@/components/ui/Badge';
 import { Modal } from '@/components/ui/Modal';
 import { CATEGORIES, Category } from '@/lib/constants';
+import { normalizePackingSizes } from '@/lib/product-types';
 import { Plus, Pencil, Trash2, Download, X, Upload } from 'lucide-react';
 
 interface ProductImage {
@@ -21,7 +22,8 @@ interface Product {
   technicalName: string;
   category: Category;
   dose: string;
-  packingSizes: string[];
+  packingSizes: { size: string; price: number; mrp: number }[];
+  details: { en: string; gu: string; hi: string };
   imageUrl: string;
   images: ProductImage[];
   isFeatured: boolean;
@@ -35,6 +37,7 @@ export default function AdminProductsPage() {
   const [editing, setEditing] = useState<Product | null>(null);
   const [selected, setSelected] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [form, setForm] = useState({
@@ -42,7 +45,8 @@ export default function AdminProductsPage() {
     technicalName: '',
     category: 'Insecticide' as Category,
     dose: '',
-    packingSizes: '',
+    packingRows: [{ size: '', price: '', mrp: '' }] as { size: string; price: string; mrp: string }[],
+    detailsEn: '',
     imageUrl: '/images/product-placeholder.svg',
     images: [] as ProductImage[],
     isFeatured: false,
@@ -62,7 +66,10 @@ export default function AdminProductsPage() {
     setEditing(null);
     setForm({
       brandName: '', technicalName: '', category: 'Insecticide',
-      dose: '', packingSizes: '', imageUrl: '/images/product-placeholder.svg',
+      dose: '',
+      packingRows: [{ size: '', price: '', mrp: '' }],
+      detailsEn: '',
+      imageUrl: '/images/product-placeholder.svg',
       images: [],
       isFeatured: false, isActive: true,
     });
@@ -76,12 +83,20 @@ export default function AdminProductsPage() {
     if (images.length === 0 && p.imageUrl && p.imageUrl !== '/images/product-placeholder.svg') {
       images = [{ url: p.imageUrl, cloudinaryId: '' }];
     }
+    const normalizedPacking = normalizePackingSizes(p.packingSizes);
     setForm({
       brandName: p.brandName,
       technicalName: p.technicalName,
       category: p.category,
       dose: p.dose,
-      packingSizes: p.packingSizes.join(', '),
+      packingRows: normalizedPacking.length
+        ? normalizedPacking.map((sku) => ({
+            size: sku.size,
+            price: sku.price ? String(sku.price) : '',
+            mrp: sku.mrp ? String(sku.mrp) : '',
+          }))
+        : [{ size: '', price: '', mrp: '' }],
+      detailsEn: p.details?.en || '',
       imageUrl: p.imageUrl,
       images,
       isFeatured: p.isFeatured,
@@ -150,10 +165,26 @@ export default function AdminProductsPage() {
   };
 
   const handleSave = async () => {
+    setSaving(true);
+    const packingSizes = form.packingRows
+      .filter((row) => row.size.trim())
+      .map((row) => ({
+        size: row.size.trim(),
+        price: parseFloat(row.price) || 0,
+        mrp: parseFloat(row.mrp) || 0,
+      }));
+
     const payload = {
-      ...form,
-      packingSizes: form.packingSizes.split(',').map((s) => s.trim()).filter(Boolean),
+      brandName: form.brandName,
+      technicalName: form.technicalName,
+      category: form.category,
+      dose: form.dose,
+      packingSizes,
+      details: form.detailsEn,
       imageUrl: form.images[0]?.url || form.imageUrl,
+      images: form.images,
+      isFeatured: form.isFeatured,
+      isActive: form.isActive,
     };
 
     const url = editing ? `/api/products/${editing._id}` : '/api/products';
@@ -172,6 +203,7 @@ export default function AdminProductsPage() {
     } else {
       toast.error('Failed to save');
     }
+    setSaving(false);
   };
 
   const handleDelete = async (id: string) => {
@@ -348,7 +380,74 @@ export default function AdminProductsPage() {
           <Select label="Category" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value as Category })}
             options={CATEGORIES.map((c) => ({ value: c, label: c }))} />
           <Textarea label="Dose Instructions" value={form.dose} onChange={(e) => setForm({ ...form, dose: e.target.value })} />
-          <Input label="Packing Sizes (comma separated)" value={form.packingSizes} onChange={(e) => setForm({ ...form, packingSizes: e.target.value })} placeholder="100ml, 250ml, 500ml, 1 Ltr" />
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Packing Sizes (Size / Price / MRP)</label>
+            <div className="space-y-2">
+              {form.packingRows.map((row, index) => (
+                <div key={index} className="flex gap-2 items-center">
+                  <input
+                    className="input-field flex-1"
+                    placeholder="e.g. 250 ML"
+                    value={row.size}
+                    onChange={(e) => {
+                      const rows = [...form.packingRows];
+                      rows[index] = { ...rows[index], size: e.target.value };
+                      setForm({ ...form, packingRows: rows });
+                    }}
+                  />
+                  <input
+                    className="input-field w-24"
+                    placeholder="Price"
+                    type="number"
+                    min="0"
+                    value={row.price}
+                    onChange={(e) => {
+                      const rows = [...form.packingRows];
+                      rows[index] = { ...rows[index], price: e.target.value };
+                      setForm({ ...form, packingRows: rows });
+                    }}
+                  />
+                  <input
+                    className="input-field w-24"
+                    placeholder="MRP"
+                    type="number"
+                    min="0"
+                    value={row.mrp}
+                    onChange={(e) => {
+                      const rows = [...form.packingRows];
+                      rows[index] = { ...rows[index], mrp: e.target.value };
+                      setForm({ ...form, packingRows: rows });
+                    }}
+                  />
+                  {form.packingRows.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setForm({ ...form, packingRows: form.packingRows.filter((_, i) => i !== index) })}
+                      className="p-2 text-red-500 hover:bg-red-50 rounded"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="mt-2"
+              onClick={() => setForm({ ...form, packingRows: [...form.packingRows, { size: '', price: '', mrp: '' }] })}
+            >
+              + Add Packing Size
+            </Button>
+          </div>
+
+          <Textarea
+            label="Product Details (English only — auto-translated to Gujarati & Hindi)"
+            value={form.detailsEn}
+            onChange={(e) => setForm({ ...form, detailsEn: e.target.value })}
+          />
 
           <div className="flex gap-4">
             <label className="flex items-center gap-2">
@@ -361,7 +460,9 @@ export default function AdminProductsPage() {
             </label>
           </div>
 
-          <Button onClick={handleSave} className="w-full">{editing ? 'Update' : 'Save'} Product</Button>
+          <Button onClick={handleSave} className="w-full" disabled={saving}>
+            {saving ? 'Translating & saving...' : editing ? 'Update' : 'Save'} Product
+          </Button>
         </div>
       </Modal>
     </div>

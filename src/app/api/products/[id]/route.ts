@@ -3,6 +3,7 @@ import { connectDB } from '@/lib/db';
 import { requireAuth } from '@/lib/auth';
 import { productSchema } from '@/lib/validators';
 import { deleteImage } from '@/lib/cloudinary';
+import { resolveProductDetails } from '@/lib/product-details';
 import Product from '@/models/Product';
 
 export async function GET(
@@ -30,6 +31,10 @@ export async function PUT(
     await connectDB();
     const body = await req.json();
     const data = productSchema.partial().parse(body);
+
+    if (data.details !== undefined) {
+      data.details = await resolveProductDetails(data.details);
+    }
 
     const product = await Product.findByIdAndUpdate(params.id, data, { new: true });
     if (!product) {

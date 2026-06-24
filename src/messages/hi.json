@@ -64,6 +64,11 @@
   "productDetail": {
     "dose": "खुराक निर्देश",
     "packingSizes": "उपलब्ध पैकिंग साइज",
+    "productDetails": "उत्पाद विवरण",
+    "translating": "अनुवाद हो रहा है...",
+    "mrp": "MRP",
+    "percentOff": "{percent}% छूट",
+    "contactForPrice": "कीमत के लिए संपर्क करें",
     "sendInquiry": "पूछताछ भेजें",
     "buyNow": "अभी खरीदें",
     "related": "संबंधित उत्पाद",

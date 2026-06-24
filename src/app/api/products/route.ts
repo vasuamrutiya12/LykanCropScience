@@ -3,6 +3,7 @@ import { connectDB } from '@/lib/db';
 import { requireAuth } from '@/lib/auth';
 import { productSchema } from '@/lib/validators';
 import { slugify } from '@/lib/constants';
+import { resolveProductDetails } from '@/lib/product-details';
 import Product from '@/models/Product';
 
 export async function GET(req: NextRequest) {
@@ -49,12 +50,13 @@ export async function POST(req: NextRequest) {
     await connectDB();
     const body = await req.json();
     const data = productSchema.parse(body);
+    const details = await resolveProductDetails(data.details);
 
     let slug = slugify(data.brandName);
     const existing = await Product.findOne({ slug });
     if (existing) slug = `${slug}-${Date.now()}`;
 
-    const product = await Product.create({ ...data, slug });
+    const product = await Product.create({ ...data, details, slug });
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
     const msg = error instanceof Error ? error.message : 'Failed to create product';

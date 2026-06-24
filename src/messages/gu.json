@@ -64,6 +64,11 @@
   "productDetail": {
     "dose": "ડોઝ સૂચનાઓ",
     "packingSizes": "ઉપલબ્ધ પેકિંગ સાઇઝ",
+    "productDetails": "ઉત્પાદન વિગતો",
+    "translating": "અનુવાદ થઈ રહ્યો છે...",
+    "mrp": "MRP",
+    "percentOff": "{percent}% ડિસ્કાઉન્ટ",
+    "contactForPrice": "કિંમત માટે સંપર્ક કરો",
     "sendInquiry": "પૂછતાછ મોકલો",
     "buyNow": "હવે ખરીદો",
     "related": "સંબંધિત ઉત્પાદનો",

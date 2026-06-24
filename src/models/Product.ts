@@ -6,14 +6,27 @@ export interface IProductImage {
   cloudinaryId: string;
 }
 
+export interface IPackingSize {
+  size: string;
+  price: number;
+  mrp: number;
+}
+
+export interface IProductDetails {
+  en: string;
+  gu: string;
+  hi: string;
+}
+
 export interface IProduct extends Document {
   brandName: string;
   technicalName: string;
   slug: string;
   category: Category;
   dose: string;
-  packingSizes: string[];
+  packingSizes: IPackingSize[];
   pricePerPacking: Map<string, number>;
+  details: IProductDetails;
   imageUrl: string;
   cloudinaryId?: string;
   images: IProductImage[];
@@ -34,8 +47,19 @@ const ProductSchema = new Schema<IProduct>(
       required: true,
     },
     dose: { type: String, default: '' },
-    packingSizes: [{ type: String }],
+    packingSizes: [
+      {
+        size: { type: String, required: true },
+        price: { type: Number, default: 0 },
+        mrp: { type: Number, default: 0 },
+      },
+    ],
     pricePerPacking: { type: Map, of: Number, default: {} },
+    details: {
+      en: { type: String, default: '' },
+      gu: { type: String, default: '' },
+      hi: { type: String, default: '' },
+    },
     imageUrl: { type: String, default: '/images/product-placeholder.svg' },
     cloudinaryId: { type: String },
     images: [{

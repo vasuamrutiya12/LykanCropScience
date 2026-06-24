@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import { requireAuth } from '@/lib/auth';
 import Product from '@/models/Product';
+import { normalizePackingSizes } from '@/lib/product-types';
 import * as XLSX from 'xlsx';
 
 export async function GET() {
@@ -10,15 +11,19 @@ export async function GET() {
     await connectDB();
     const products = await Product.find().sort({ brandName: 1 }).lean();
 
-    const data = products.map((p) => ({
-      'Brand Name': p.brandName,
-      'Technical Name': p.technicalName,
-      Category: p.category,
-      Dose: p.dose,
-      'Packing Sizes': p.packingSizes?.join(', '),
-      Featured: p.isFeatured ? 'Yes' : 'No',
-      Active: p.isActive ? 'Yes' : 'No',
-    }));
+    const data = products.map((p) => {
+      const packing = normalizePackingSizes(p.packingSizes, p.pricePerPacking);
+      return {
+        'Brand Name': p.brandName,
+        'Technical Name': p.technicalName,
+        Category: p.category,
+        Dose: p.dose,
+        'Packing Sizes': packing.map((s) => `${s.size} (₹${s.price}/${s.mrp})`).join('; '),
+        'Details (EN)': p.details?.en || '',
+        Featured: p.isFeatured ? 'Yes' : 'No',
+        Active: p.isActive ? 'Yes' : 'No',
+      };
+    });
 
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();

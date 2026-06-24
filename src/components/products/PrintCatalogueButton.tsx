@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/Button';
 import { Printer } from 'lucide-react';
+import { normalizePackingSizes } from '@/lib/product-types';
 
 export function PrintCatalogueButton() {
   const t = useTranslations('products');
@@ -46,14 +47,17 @@ export function PrintCatalogueButton() {
           <h2>${cat} (${items.length})</h2>
           <table>
             <tr><th>#</th><th>Brand Name</th><th>Technical Name</th><th>Packing</th></tr>
-            ${items.map((p: { brandName: string; technicalName?: string; packingSizes?: string[] }, i: number) => `
+            ${items.map((p: { brandName: string; technicalName?: string; packingSizes?: unknown; pricePerPacking?: Record<string, number> }, i: number) => {
+              const packing = normalizePackingSizes(p.packingSizes, p.pricePerPacking);
+              return `
               <tr>
                 <td>${i + 1}</td>
                 <td><strong>${p.brandName}</strong></td>
                 <td>${p.technicalName || '-'}</td>
-                <td>${p.packingSizes?.join(', ') || 'Contact for details'}</td>
+                <td>${packing.map((s) => s.size).join(', ') || 'Contact for details'}</td>
               </tr>
-            `).join('')}
+            `;
+            }).join('')}
           </table>
         `).join('')}
         <div class="footer">© ${new Date().getFullYear()} LYKAN CROP SCIENCE. All rights reserved.</div>

@@ -184,6 +184,7 @@ async function seed() {
       category: p.category,
       dose: '',
       packingSizes: [],
+      details: { en: '', gu: '', hi: '' },
       imageUrl: '/images/product-placeholder.svg',
       isFeatured: false,
       isActive: true,

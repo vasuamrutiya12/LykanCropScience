@@ -6,6 +6,7 @@ import { Link } from '@/i18n/routing';
 import { CategoryBadge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Category } from '@/lib/constants';
+import { normalizePackingSizes, PackingSize } from '@/lib/product-types';
 
 export interface ProductData {
   _id: string;
@@ -14,7 +15,8 @@ export interface ProductData {
   slug: string;
   category: Category;
   dose?: string;
-  packingSizes?: string[];
+  packingSizes?: PackingSize[] | string[];
+  pricePerPacking?: Record<string, number>;
   imageUrl: string;
 }
 
@@ -49,11 +51,15 @@ export function ProductCard({ product, onInquiry }: ProductCardProps) {
         <p className="text-sm text-gray-500 mt-1">
           {product.technicalName || t('contactForDetails')}
         </p>
-        {product.packingSizes && product.packingSizes.length > 0 && (
-          <p className="text-xs text-gray-400 mt-2">
-            {t('packing')}: {product.packingSizes.join(', ')}
-          </p>
-        )}
+        {(() => {
+          const sizes = normalizePackingSizes(product.packingSizes, product.pricePerPacking);
+          if (sizes.length === 0) return null;
+          return (
+            <p className="text-xs text-gray-400 mt-2">
+              {t('packing')}: {sizes.map((s) => s.size).join(', ')}
+            </p>
+          );
+        })()}
         <div className="flex gap-2 mt-auto pt-4">
           <Link href={`/products/${product.slug}`} className="flex-1">
             <Button variant="outline" size="sm" className="w-full">
