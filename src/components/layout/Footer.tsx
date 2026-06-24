@@ -13,13 +13,15 @@ export function Footer() {
     <footer className="bg-navy text-white pt-12 pb-24 md:pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Leaf className="w-8 h-8 text-accent" />
-              <span className="font-heading font-bold text-lg">{COMPANY.name}</span>
-            </div>
-            <p className="text-white/70 text-sm mb-4">{COMPANY.tagline}</p>
-            <p className="text-white/60 text-sm">{t('rights')} © {new Date().getFullYear()}</p>
+          <div className="flex flex-col items-start">
+            <Link href="/" className="flex items-center py-2 -ml-3">
+              <img
+                src="/fulllogo.png"
+                alt="LYKAN CROP SCIENCE"
+                className="h-14 md:h-16 w-auto object-contain"
+              />
+            </Link>
+            <p className="text-white/50 text-sm pl-3">{t('rights')} © {new Date().getFullYear()}</p>
           </div>
 
           <div>

@@ -56,12 +56,6 @@ export function Hero({ bannerUrl, logoUrl }: HeroProps) {
              drop-shadow-[0_0_30px_rgba(255,255,255,0.7)]"
               />
 
-              <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-10 leading-tight">
-                <span className="text-white">First Choice For </span>
-                <span className="bg-gradient-to-r from-[#9AE85C] to-[#3CA35A] bg-clip-text text-transparent">
-                  Smart Farmers
-                </span>
-              </h1>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/products">
