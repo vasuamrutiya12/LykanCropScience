@@ -1,4 +1,5 @@
 import { Poppins, Inter } from 'next/font/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
 const poppins = Poppins({
@@ -19,7 +20,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#1a5c1a" />
       </head>
-      <body className={`${poppins.variable} ${inter.variable}`}>{children}</body>
+      <body className={`${poppins.variable} ${inter.variable}`}>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

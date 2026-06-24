@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@react-pdf/renderer": "^3.4.4",
+    "@vercel/speed-insights": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
     "dotenv": "^17.4.2",
